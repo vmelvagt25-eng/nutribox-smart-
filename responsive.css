@@ -1,0 +1,550 @@
+/* ============================================================
+   NUTRIBOX — RESPONSIVE COMPLETO
+   Breakpoints:
+     xs:  < 480px   (móvil pequeño: iPhone SE, Android básico)
+     sm:  480–639px (móvil grande: iPhone 14, Galaxy S)
+     md:  640–767px (móvil landscape / tablet pequeña)
+     lg:  768–1023px (tablet: iPad)
+     xl:  1024px+   (desktop) → estilos base ya cubren esto
+   ============================================================ */
+
+/* ============================================================
+   VARIABLES RESPONSIVE
+   ============================================================ */
+:root {
+  --nav-h: 60px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+/* touch-action para mejor experiencia táctil */
+button, a, .recipe-card, .game-card, .role-card,
+.kids-nav-btn, .nav-btn, .emoji-check span {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Evitar zoom en inputs en iOS */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select, textarea {
+  font-size: 16px !important; /* iOS no hace zoom con 16px */
+}
+
+/* Scrollbars más delgadas en móvil */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-thumb { background: rgba(76,175,80,0.4); border-radius: 4px; }
+
+/* ============================================================
+   SPLASH — MÓVIL
+   ============================================================ */
+@media (max-width: 639px) {
+  .logo-icon { font-size: 56px; }
+  .logo-text  { font-size: 44px; }
+  .logo-tagline { margin: 12px auto; padding: 12px 16px; }
+  .logo-tagline p { font-size: 13px; }
+  .splash-buttons { flex-direction: column; align-items: center; gap: 12px; padding: 0 24px; }
+  .splash-buttons .btn-primary,
+  .splash-buttons .btn-secondary { width: 100%; max-width: 320px; }
+  .ffruit { font-size: 1.4rem; }
+}
+
+/* ============================================================
+   AUTH — MÓVIL
+   ============================================================ */
+@media (max-width: 639px) {
+  .auth-card { padding: 28px 20px; border-radius: 20px; }
+  .auth-card h2 { font-size: 18px; margin-bottom: 16px; }
+}
+
+/* ============================================================
+   ROLE SELECTOR — MÓVIL
+   ============================================================ */
+@media (max-width: 639px) {
+  .role-bg { padding: 24px 16px; gap: 24px; }
+  .role-header h2 { font-size: 24px; }
+  .role-cards { flex-direction: column; align-items: center; width: 100%; }
+  .role-card { width: 100%; max-width: 340px; padding: 28px 20px; }
+  .role-emoji { font-size: 48px; }
+}
+
+/* ============================================================
+   NAVBAR PADRES — MÓVIL (hamburger scroll)
+   ============================================================ */
+@media (max-width: 767px) {
+  .parents-nav {
+    padding: 10px 12px;
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .parents-nav::-webkit-scrollbar { display: none; }
+  .nav-logo { font-size: 18px; white-space: nowrap; flex-shrink: 0; }
+  .nav-links {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex: 1;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    padding: 7px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .btn-exit { font-size: 11px; padding: 7px 10px; flex-shrink: 0; }
+}
+
+/* ============================================================
+   CONTENIDO PADRES — MÓVIL
+   ============================================================ */
+@media (max-width: 639px) {
+  .ptab-content { padding: 16px 12px; }
+
+  /* Welcome banner */
+  .welcome-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 16px;
+    gap: 12px;
+  }
+  .welcome-text h2 { font-size: 20px; }
+  .welcome-emoji { font-size: 40px; }
+
+  /* Stats grid → 2 columnas en móvil */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .stat-card { padding: 16px 12px; }
+  .stat-icon { font-size: 24px; }
+  .stat-number { font-size: 28px; }
+  .stat-label { font-size: 11px; }
+
+  /* Árbol */
+  .tree-container-parent { flex-direction: column; align-items: center; text-align: center; }
+  .tree-display { font-size: 48px; }
+
+  /* Recetario */
+  .tab-header { flex-direction: column; align-items: stretch; }
+  .tab-header h2 { font-size: 20px; }
+  .search-bar { max-width: 100%; }
+  .recipes-grid { grid-template-columns: 1fr; }
+  .recipe-emoji { height: 100px; font-size: 48px; }
+
+  /* Filtros — scroll horizontal */
+  .filter-tags {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .filter-tags::-webkit-scrollbar { display: none; }
+  .tag { flex-shrink: 0; }
+
+  /* Preferencias */
+  .prefs-grid { grid-template-columns: 1fr; }
+
+  /* Precios */
+  .price-grid { grid-template-columns: 1fr; }
+  .price-table { font-size: 11px; }
+  .price-table th, .price-table td { padding: 5px; }
+  .savings-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  .savings-amount { font-size: 24px; }
+
+  /* Gastos */
+  .form-row { flex-direction: column; }
+  .ingredient-row { flex-wrap: wrap; }
+  .input-field.small { width: 100%; margin-right: 0; margin-bottom: 6px; }
+  .input-field.tiny { width: 100%; }
+  .chart-container { gap: 6px; }
+  .chart-bar-label { font-size: 9px; }
+
+  /* Salón */
+  .salon-grid { grid-template-columns: 1fr; }
+
+  /* Foro */
+  .foro-post-actions { flex-wrap: wrap; gap: 8px; }
+}
+
+/* ============================================================
+   MODAL RECETA — MÓVIL
+   ============================================================ */
+@media (max-width: 639px) {
+  .modal-overlay { padding: 8px; align-items: flex-end; }
+  .modal-card {
+    border-radius: 24px 24px 0 0;
+    padding: 20px 16px;
+    max-height: 92vh;
+  }
+  .modal-recipe-emoji { font-size: 56px; }
+  .nutri-grid { grid-template-columns: repeat(2, 1fr); }
+  .game-modal-card {
+    border-radius: 24px 24px 0 0;
+    max-height: 95vh;
+  }
+}
+
+/* ============================================================
+   NAVBAR NIÑOS — MÓVIL
+   ============================================================ */
+@media (max-width: 767px) {
+  .kids-nav {
+    padding: 8px 10px;
+    gap: 6px;
+    flex-wrap: nowrap;
+  }
+  .kids-nav-logo { font-size: 16px; flex-shrink: 0; }
+  .kids-nav-coins {
+    font-size: 11px;
+    padding: 4px 10px;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .kids-nav-links { gap: 3px; }
+  .kids-nav-btn {
+    padding: 7px 10px;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .btn-exit-kids { padding: 6px 10px; font-size: 16px; }
+}
+
+/* Navbar niños pegada abajo en móvil (estilo app nativa) */
+@media (max-width: 639px) {
+  .kids-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    z-index: 200;
+    justify-content: space-around;
+    padding: 8px 4px calc(8px + var(--safe-bottom));
+    border-top: 2px solid rgba(255,255,255,0.1);
+    border-bottom: none;
+  }
+  .kids-nav-logo { display: none; }
+  .kids-nav-coins { display: none; }
+  .kids-nav-links { flex: none; gap: 0; justify-content: space-around; width: 100%; }
+  .kids-nav-btn { padding: 8px 12px; font-size: 22px; }
+  .btn-exit-kids { font-size: 20px; padding: 8px; }
+
+  /* Compensar la nav fija abajo */
+  .kids-app { padding-bottom: calc(68px + var(--safe-bottom)); }
+
+  /* Header fijo arriba para niños en móvil */
+  .kids-topbar {
+    display: flex !important;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px calc(8px + var(--safe-top));
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .kids-app { padding-top: 52px; }
+}
+
+/* ============================================================
+   CONTENIDO NIÑOS — MÓVIL
+   ============================================================ */
+@media (max-width: 639px) {
+  .kids-tab-content { padding: 16px 12px; }
+  .kids-title { font-size: 24px; margin-bottom: 16px; }
+  .kids-home { padding: 16px 12px; }
+  .kids-welcome h1 { font-size: 26px; }
+
+  /* Stats fila horizontal que hace scroll */
+  .kids-stats {
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .kids-stats::-webkit-scrollbar { display: none; }
+  .kids-stat-card { min-width: 90px; padding: 14px 10px; flex-shrink: 0; }
+  .kids-stat-num { font-size: 24px; }
+
+  /* Reto */
+  .challenge-card { flex-direction: column; align-items: flex-start; }
+  .btn-challenge { margin-left: 0; width: 100%; text-align: center; }
+
+  /* Formulario */
+  .kids-form-grid { grid-template-columns: 1fr; }
+
+  /* Insignias */
+  .badges-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .badge-item { padding: 14px 10px; }
+  .badge-item .badge-emoji { font-size: 28px; }
+  .badge-item h4 { font-size: 12px; }
+  .bp-header { flex-direction: column; gap: 8px; align-items: flex-start; }
+
+  /* Juegos */
+  .games-grid { grid-template-columns: 1fr; }
+  .game-card { padding: 16px; }
+  .game-icon { font-size: 40px; }
+
+  /* Árbol */
+  .tree-scene { height: 240px; }
+  .milestones-list { gap: 6px; }
+  .milestone { padding: 8px 12px; font-size: 13px; }
+
+  /* Historial loncheras */
+  .kids-lunches-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+  /* Botón grande */
+  .btn-kids-primary.big { font-size: 15px; padding: 14px 20px; }
+}
+
+/* ============================================================
+   TABLET (768px – 1023px)
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Splash */
+  .logo-text { font-size: 52px; }
+
+  /* Padres nav */
+  .parents-nav { padding: 12px 16px; }
+  .nav-btn { padding: 7px 11px; font-size: 12px; }
+
+  /* Stats 2×2 */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Recetas 2 col */
+  .recipes-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Precios 1 col */
+  .price-grid { grid-template-columns: 1fr; }
+
+  /* Modal */
+  .modal-card { max-width: 90vw; }
+
+  /* Niños: insignias 3 col */
+  .badges-grid { grid-template-columns: repeat(3, 1fr); }
+
+  /* Juegos 2 col */
+  .games-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   TABLET LANDSCAPE / DESKTOP PEQUEÑO (640px – 767px)
+   ============================================================ */
+@media (min-width: 640px) and (max-width: 767px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .recipes-grid { grid-template-columns: repeat(2, 1fr); }
+  .kids-form-grid { grid-template-columns: repeat(2, 1fr); }
+  .badges-grid { grid-template-columns: repeat(2, 1fr); }
+  .games-grid { grid-template-columns: repeat(2, 1fr); }
+  .kids-lunches-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ============================================================
+   LANDSCAPE MÓVIL (altura < 500px)
+   ============================================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .splash-content { padding: 12px 20px; }
+  .logo-icon { font-size: 40px; }
+  .logo-text { font-size: 36px; }
+  .logo-tagline { display: none; }
+  .splash-buttons { flex-direction: row; margin-top: 12px; }
+
+  .auth-card { padding: 16px 20px; }
+  .auth-card h2 { margin-bottom: 10px; font-size: 16px; }
+  .form-group { margin-bottom: 10px; }
+
+  /* Kids nav se queda arriba en landscape */
+  .kids-nav {
+    position: sticky !important;
+    top: 0 !important;
+    bottom: auto !important;
+  }
+  .kids-app { padding-bottom: 0 !important; padding-top: 0 !important; }
+  .kids-topbar { display: none !important; }
+}
+
+/* ============================================================
+   REWARD MODAL — TODOS
+   ============================================================ */
+@media (max-width: 639px) {
+  .reward-card {
+    padding: 32px 20px;
+    margin: 16px;
+    border-radius: 24px;
+  }
+  .reward-icon { font-size: 56px; }
+  .reward-card h2 { font-size: 22px; }
+}
+
+/* ============================================================
+   TOAST / NOTIFICACIONES
+   ============================================================ */
+@media (max-width: 639px) {
+  .notification-toast {
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: calc(80px + var(--safe-bottom));
+    max-width: none;
+    border-radius: 16px;
+    border-left: none;
+    border-top: 4px solid var(--green);
+  }
+  .notification-toast.kids {
+    border-top-color: var(--yellow);
+    border-left: none;
+    bottom: calc(82px + var(--safe-bottom));
+  }
+}
+
+/* ============================================================
+   TOPBAR NIÑOS (visible solo en móvil, hidden por defecto)
+   ============================================================ */
+.kids-topbar { display: none; }
+
+/* ============================================================
+   MEJORAS TÁCTILES GENERALES
+   ============================================================ */
+
+/* Área táctil mínima de 44px (WCAG 2.5.5) */
+.nav-btn, .kids-nav-btn, .btn-play, .btn-fav,
+.btn-prepared, .btn-like, .btn-role-parent,
+.btn-role-kids, .tag, .btn-challenge {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mejor scroll en listas largas */
+.parents-app, .kids-app, .ptab-content, .kids-tab-content {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Deshabilitar selección de texto en elementos de juego */
+.game-canvas-area, .fall-item, .mem-card, .runner, .obstacle {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Mejorar rendimiento de animaciones en móvil */
+.recipe-card, .game-card, .role-card, .stat-card, .badge-item {
+  will-change: transform;
+}
+
+/* Focus visible para accesibilidad en teclado */
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   TABLA PRECIOS — scroll horizontal en móvil
+   ============================================================ */
+@media (max-width: 639px) {
+  .price-card { overflow-x: auto; }
+  .price-table { min-width: 320px; }
+  .price-table th, .price-table td { font-size: 11px; padding: 6px 4px; }
+}
+
+/* ============================================================
+   GASTOS — ingredient rows apilados en móvil
+   ============================================================ */
+@media (max-width: 480px) {
+  .ingredient-row { flex-direction: column; }
+  .ingredient-row .input-field.small,
+  .ingredient-row .input-field.tiny {
+    width: 100% !important;
+    margin-right: 0 !important;
+  }
+  .gasto-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .gasto-total { align-self: flex-end; }
+}
+
+/* ============================================================
+   JUEGOS MODAL — pantalla pequeña
+   ============================================================ */
+@media (max-width: 639px) {
+  .game-modal-card { padding: 16px 12px; }
+  .game-canvas-area { height: 200px; }
+  .mem-card { width: 52px; height: 52px; }
+  .mem-card .mem-front,
+  .mem-card .mem-back { font-size: 22px; }
+  #mem-grid { grid-template-columns: repeat(4, 52px) !important; gap: 6px !important; }
+  .game-controls { gap: 8px; }
+  .btn-game-ctrl { padding: 10px 14px; font-size: 13px; }
+
+  /* Puzzle más pequeño en móvil */
+  #puzzle-board { grid-template-columns: repeat(3, 44px) !important; gap: 3px !important; }
+  #puzzle-board > div { width: 44px !important; height: 44px !important; font-size: 22px !important; }
+  #puzzle-pieces span { font-size: 28px !important; }
+}
+
+/* ============================================================
+   ÁRBOL — responsivo
+   ============================================================ */
+@media (max-width: 639px) {
+  .tree-scene { height: 200px; border-radius: 16px; }
+  .tree-pot { bottom: 10px; }
+  .pot { font-size: 36px; }
+  .tree-visual { font-size: 48px; }
+  .tree-stage-label { font-size: 12px; }
+}
+
+/* ============================================================
+   SALÓN DE LA FAMA — móvil
+   ============================================================ */
+@media (max-width: 480px) {
+  .salon-post-img { height: 120px; font-size: 44px; }
+  .salon-post-body { padding: 12px; }
+  .salon-post-actions { flex-wrap: wrap; gap: 8px; }
+}
+
+/* ============================================================
+   FORO — móvil
+   ============================================================ */
+@media (max-width: 480px) {
+  .foro-post { padding: 14px; }
+  .foro-post-actions { flex-wrap: wrap; }
+  .btn-react { font-size: 12px; padding: 5px 10px; }
+}
+
+/* ============================================================
+   SPLASH — dispositivos muy pequeños (< 360px)
+   ============================================================ */
+@media (max-width: 359px) {
+  .logo-text { font-size: 36px; }
+  .logo-icon { font-size: 44px; }
+  .btn-primary, .btn-secondary { font-size: 14px; padding: 12px 20px; }
+  .kids-title { font-size: 20px; }
+  .badges-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   PRINT — por si alguien imprime una receta
+   ============================================================ */
+@media print {
+  .parents-nav, .kids-nav, .splash-bg,
+  .btn-primary, .btn-secondary, .btn-exit,
+  .floating-fruits, .modal-overlay { display: none !important; }
+  .ptab { display: block !important; }
+  .modal-card { box-shadow: none; max-width: 100%; }
+  body { background: white; }
+}

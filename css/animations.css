@@ -1,0 +1,143 @@
+/* ============================================================
+   NUTRIBOX - ANIMACIONES
+   ============================================================ */
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes floatFruit {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-20px) rotate(10deg); }
+  66% { transform: translateY(-10px) rotate(-8deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,214,0,0.4); }
+  50% { box-shadow: 0 0 40px rgba(255,214,0,0.8); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; pointer-events: none; }
+}
+
+@keyframes confettiFall {
+  0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(400px) rotate(720deg); opacity: 0; }
+}
+
+@keyframes growTree {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.3) rotate(5deg); }
+  75% { transform: scale(0.9) rotate(-5deg); }
+}
+
+@keyframes scoreUp {
+  0% { transform: scale(0.5) translateY(20px); opacity: 0; }
+  50% { transform: scale(1.3) translateY(0); opacity: 1; }
+  100% { transform: scale(1) translateY(-10px); opacity: 0; }
+}
+
+@keyframes shakeNo {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  80% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes starGlow {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 5px gold); }
+  50% { filter: brightness(1.5) drop-shadow(0 0 20px gold); }
+}
+
+@keyframes rainbowText {
+  0% { color: #ff0000; }
+  16% { color: #ff8800; }
+  33% { color: #ffff00; }
+  50% { color: #00ff00; }
+  66% { color: #0088ff; }
+  83% { color: #8800ff; }
+  100% { color: #ff0000; }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+/* Applied classes */
+.animate-bounce { animation: bounce 0.6s ease; }
+.animate-pop { animation: popIn 0.4s ease; }
+.animate-slide { animation: slideIn 0.4s ease; }
+.animate-sparkle { animation: sparkle 0.8s ease; }
+.logo-container { animation: slideIn 0.8s ease; }
+.splash-buttons { animation: slideIn 1s ease 0.3s both; }
+
+/* Falling items in game */
+.fall-item {
+  position: absolute;
+  font-size: 28px;
+  animation: fallDown linear forwards;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s;
+}
+.fall-item:hover { transform: scale(1.3); }
+
+@keyframes fallDown {
+  from { top: -40px; }
+  to { top: 110%; }
+}
+
+/* Memory game cards */
+.mem-card {
+  width: 70px; height: 70px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  font-size: 32px; cursor: pointer; transition: all 0.3s;
+  perspective: 600px;
+}
+.mem-card .mem-front { font-size: 28px; }
+.mem-card .mem-back { font-size: 28px; display: none; }
+.mem-card.flipped { background: rgba(255,214,0,0.2); border-color: var(--yellow); }
+.mem-card.matched { background: rgba(76,175,80,0.3); border-color: var(--green); animation: popIn 0.4s ease; }
+
+/* Run game character */
+.runner {
+  position: absolute; bottom: 30px; left: 40px; font-size: 40px;
+  transition: bottom 0.3s ease;
+}
+.obstacle {
+  position: absolute; bottom: 20px; right: -40px;
+  font-size: 32px; animation: moveLeft linear forwards;
+}
+@keyframes moveLeft {
+  from { right: -40px; }
+  to { right: 110%; }
+}
