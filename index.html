@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriBox 🥗</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+  <!-- PWA / App-like meta tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NutriBox">
+  <meta name="theme-color" content="#4CAF50">
+  <meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+<div id="app">
+
+  <!-- SPLASH SCREEN -->
+  <div id="screen-splash" class="screen active">
+    <div class="splash-bg">
+      <div class="splash-content">
+        <div class="logo-container">
+          <div class="logo-icon">🥗</div>
+          <h1 class="logo-text">NutriBox</h1>
+          <div class="logo-tagline">
+            <p>"Cada lonchera saludable es un paso<br>hacia un futuro más fuerte."</p>
+          </div>
+        </div>
+        <div class="splash-buttons">
+          <button class="btn-primary" onclick="showScreen('screen-login')">🚀 Ingresar</button>
+          <button class="btn-secondary" onclick="showScreen('screen-register')">✨ Crear cuenta</button>
+        </div>
+      </div>
+      <div class="floating-fruits">
+        <span class="ffruit" style="--i:1">🍎</span>
+        <span class="ffruit" style="--i:2">🥕</span>
+        <span class="ffruit" style="--i:3">🍌</span>
+        <span class="ffruit" style="--i:4">🥦</span>
+        <span class="ffruit" style="--i:5">🍓</span>
+        <span class="ffruit" style="--i:6">🍊</span>
+        <span class="ffruit" style="--i:7">🍇</span>
+        <span class="ffruit" style="--i:8">🥑</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="screen-login" class="screen">
+    <div class="auth-bg">
+      <div class="auth-card">
+        <button class="btn-back" onclick="showScreen('screen-splash')">← Volver</button>
+        <div class="auth-logo">🥗 <span>NutriBox</span></div>
+        <h2>¡Bienvenido de vuelta!</h2>
+        <div class="form-group">
+          <label>📧 Correo electrónico</label>
+          <input type="email" id="login-email" placeholder="tucorreo@email.com" class="input-field">
+        </div>
+        <div class="form-group">
+          <label>🔒 Contraseña</label>
+          <input type="password" id="login-pass" placeholder="••••••••" class="input-field">
+        </div>
+        <button class="btn-primary full" onclick="doLogin()">Ingresar 🚀</button>
+        <p class="auth-switch">¿No tienes cuenta? <a onclick="showScreen('screen-register')">Regístrate</a></p>
+        <div class="demo-hint">🎮 Demo: usa cualquier email/contraseña</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTRO -->
+  <div id="screen-register" class="screen">
+    <div class="auth-bg">
+      <div class="auth-card">
+        <button class="btn-back" onclick="showScreen('screen-splash')">← Volver</button>
+        <div class="auth-logo">🥗 <span>NutriBox</span></div>
+        <h2>¡Crea tu cuenta!</h2>
+        <div class="form-group">
+          <label>👤 Nombre</label>
+          <input type="text" id="reg-name" placeholder="Tu nombre" class="input-field">
+        </div>
+        <div class="form-group">
+          <label>📧 Correo electrónico</label>
+          <input type="email" id="reg-email" placeholder="tucorreo@email.com" class="input-field">
+        </div>
+        <div class="form-group">
+          <label>🔒 Contraseña</label>
+          <input type="password" id="reg-pass" placeholder="••••••••" class="input-field">
+        </div>
+        <button class="btn-primary full" onclick="doRegister()">Crear cuenta ✨</button>
+        <p class="auth-switch">¿Ya tienes cuenta? <a onclick="showScreen('screen-login')">Ingresar</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SELECTOR DE ROL -->
+  <div id="screen-role" class="screen">
+    <div class="role-bg">
+      <div class="role-header">
+        <div class="auth-logo">🥗 <span>NutriBox</span></div>
+        <h2>¿Quién eres hoy?</h2>
+        <p>Elige tu perfil para continuar</p>
+      </div>
+      <div class="role-cards">
+        <div class="role-card parent-card" onclick="enterSection('parents')">
+          <div class="role-emoji">👨‍👩‍👧</div>
+          <h3>Sección Padres</h3>
+          <p>Recetas, gastos, progreso y más</p>
+          <button class="btn-role-parent">Entrar →</button>
+        </div>
+        <div class="role-card kids-card" onclick="enterSection('kids')">
+          <div class="role-emoji">🧒</div>
+          <h3>Sección Niños</h3>
+          <p>Juegos, insignias y diversión</p>
+          <button class="btn-role-kids">¡Jugar! →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SECCIÓN PADRES ==================== -->
+  <div id="section-parents" class="screen">
+    <div class="parents-app">
+
+      <!-- NAVBAR PADRES -->
+      <nav class="parents-nav">
+        <div class="nav-logo">🥗 NutriBox</div>
+        <div class="nav-links">
+          <button class="nav-btn active" onclick="showParentTab('home')" id="pnav-home">🏠 Inicio</button>
+          <button class="nav-btn" onclick="showParentTab('recetas')" id="pnav-recetas">📖 Recetario</button>
+          <button class="nav-btn" onclick="showParentTab('preferencias')" id="pnav-preferencias">💚 Preferencias</button>
+          <button class="nav-btn" onclick="showParentTab('precios')" id="pnav-precios">💰 Ahorra</button>
+          <button class="nav-btn" onclick="showParentTab('gastos')" id="pnav-gastos">📊 Gastos</button>
+          <button class="nav-btn" onclick="showParentTab('salon')" id="pnav-salon">🏆 Salón</button>
+          <button class="nav-btn" onclick="showParentTab('foro')" id="pnav-foro">💬 Foro</button>
+        </div>
+        <button class="btn-exit" onclick="showScreen('screen-role')">Salir</button>
+      </nav>
+
+      <!-- TAB: INICIO PADRES -->
+      <div id="ptab-home" class="ptab active">
+        <div class="ptab-content">
+          <div class="welcome-banner">
+            <div class="welcome-text">
+              <h2>¡Hola, <span id="parent-name">Mamá</span>! 👋</h2>
+              <p>Aquí está el resumen de esta semana</p>
+            </div>
+            <div class="welcome-emoji">👨‍👩‍👧</div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card green">
+              <div class="stat-icon">🥗</div>
+              <div class="stat-number" id="stat-loncheras">7</div>
+              <div class="stat-label">Loncheras preparadas</div>
+            </div>
+            <div class="stat-card orange">
+              <div class="stat-icon">⭐</div>
+              <div class="stat-number" id="stat-insignias">12</div>
+              <div class="stat-label">Insignias del niño</div>
+            </div>
+            <div class="stat-card blue">
+              <div class="stat-icon">🍎</div>
+              <div class="stat-number">5</div>
+              <div class="stat-label">Recetas nuevas</div>
+            </div>
+            <div class="stat-card yellow">
+              <div class="stat-icon">💰</div>
+              <div class="stat-number">S/45</div>
+              <div class="stat-label">Gasto semanal</div>
+            </div>
+          </div>
+          <div class="progress-section">
+            <h3>🌳 Árbol del Progreso de tu Hijo</h3>
+            <div class="tree-container-parent">
+              <div id="parent-tree-display" class="tree-display"></div>
+              <div class="tree-info">
+                <p>Insignias: <strong id="parent-tree-count">12</strong></p>
+                <p>Nivel: <strong id="parent-tree-level">⚡ Explorador Energético</strong></p>
+              </div>
+            </div>
+          </div>
+          <div class="recent-badges">
+            <h3>🏅 Últimas Insignias Obtenidas</h3>
+            <div class="badges-row">
+              <span class="badge-chip">🌱 Semilla Nutri</span>
+              <span class="badge-chip">⚡ Explorador Energético</span>
+              <span class="badge-chip">🍎 x5 Loncheras</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: RECETARIO -->
+      <div id="ptab-recetas" class="ptab">
+        <div class="ptab-content">
+          <div class="tab-header">
+            <h2>📖 Recetario NutriBox</h2>
+            <div class="search-bar">
+              <input type="text" id="recipe-search" placeholder="🔍 Buscar: pollo, frutas, rápida..." class="search-input" oninput="filterRecipes()">
+            </div>
+          </div>
+          <div class="filter-tags">
+            <button class="tag active" onclick="filterByTag('todos', this)">Todos</button>
+            <button class="tag" onclick="filterByTag('pollo', this)">🐔 Pollo</button>
+            <button class="tag" onclick="filterByTag('queso', this)">🧀 Queso</button>
+            <button class="tag" onclick="filterByTag('frutas', this)">🍎 Frutas</button>
+            <button class="tag" onclick="filterByTag('verduras', this)">🥦 Verduras</button>
+            <button class="tag" onclick="filterByTag('rapida', this)">⚡ Rápida</button>
+            <button class="tag" onclick="filterByTag('economica', this)">💰 Económica</button>
+            <button class="tag" onclick="filterByTag('proteina', this)">💪 Alta Proteína</button>
+            <button class="tag" onclick="filterByTag('vegetariana', this)">🌿 Vegetariana</button>
+          </div>
+          <div id="ai-suggestion" class="ai-card" style="display:none">
+            <span>🤖</span>
+            <span id="ai-suggestion-text">La IA sugiere...</span>
+          </div>
+          <div id="recipes-grid" class="recipes-grid"></div>
+        </div>
+      </div>
+
+      <!-- TAB: PREFERENCIAS -->
+      <div id="ptab-preferencias" class="ptab">
+        <div class="ptab-content">
+          <h2>💚 Preferencias del Niño</h2>
+          <div class="prefs-grid">
+            <div class="pref-card">
+              <h3>😍 Alimentos Favoritos</h3>
+              <div class="pref-list" id="fav-foods">
+                <span class="pref-chip green">🍌 Plátano</span>
+                <span class="pref-chip green">🥕 Zanahoria</span>
+                <span class="pref-chip green">🐔 Pollo</span>
+                <span class="pref-chip green">🧀 Queso</span>
+              </div>
+            </div>
+            <div class="pref-card">
+              <h3>😕 No le gusta</h3>
+              <div class="pref-list" id="dislike-foods">
+                <span class="pref-chip red">🥦 Brócoli</span>
+                <span class="pref-chip red">🧅 Cebolla</span>
+              </div>
+            </div>
+            <div class="pref-card">
+              <h3>🍎 Frutas Favoritas</h3>
+              <div class="pref-list">
+                <span class="pref-chip orange">🍎 Manzana</span>
+                <span class="pref-chip orange">🍓 Fresa</span>
+                <span class="pref-chip orange">🍇 Uvas</span>
+              </div>
+            </div>
+            <div class="pref-card">
+              <h3>🥗 Verduras Favoritas</h3>
+              <div class="pref-list">
+                <span class="pref-chip green">🥕 Zanahoria</span>
+                <span class="pref-chip green">🍅 Tomate</span>
+              </div>
+            </div>
+            <div class="pref-card">
+              <h3>⚠️ Alergias</h3>
+              <div class="pref-list">
+                <span class="pref-chip yellow">🥜 Maní (leve)</span>
+              </div>
+            </div>
+            <div class="pref-card">
+              <h3>😋 Nivel de Satisfacción</h3>
+              <div class="satisfaction-chart">
+                <div class="sat-bar">
+                  <span>Wrap Power</span>
+                  <div class="bar-fill" style="--pct:90%">90%</div>
+                </div>
+                <div class="sat-bar">
+                  <span>Brochetas</span>
+                  <div class="bar-fill" style="--pct:85%">85%</div>
+                </div>
+                <div class="sat-bar">
+                  <span>Mini Hamburguesas</span>
+                  <div class="bar-fill" style="--pct:95%">95%</div>
+                </div>
+                <div class="sat-bar">
+                  <span>Pizza Escolar</span>
+                  <div class="bar-fill" style="--pct:80%">80%</div>
+                </div>
+                <div class="sat-bar">
+                  <span>Rollitos</span>
+                  <div class="bar-fill" style="--pct:75%">75%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: AHORRA COMPRANDO -->
+      <div id="ptab-precios" class="ptab">
+        <div class="ptab-content">
+          <h2>💰 Ahorra Comprando</h2>
+          <p class="tab-subtitle">Comparador de precios para tu lonchera</p>
+          <div class="price-grid" id="price-grid">
+            <div class="price-card">
+              <div class="price-cat">🥕 Frutas y Verduras</div>
+              <table class="price-table">
+                <tr><th>Producto</th><th>Mercado</th><th>Super</th><th>Ahorro</th></tr>
+                <tr><td>🍎 Manzana x6</td><td>S/3.00</td><td>S/4.50</td><td class="save">S/1.50</td></tr>
+                <tr><td>🥕 Zanahoria 1kg</td><td>S/1.50</td><td>S/2.80</td><td class="save">S/1.30</td></tr>
+                <tr><td>🍅 Tomate 1kg</td><td>S/2.00</td><td>S/3.50</td><td class="save">S/1.50</td></tr>
+                <tr><td>🥦 Brócoli</td><td>S/2.50</td><td>S/4.00</td><td class="save">S/1.50</td></tr>
+              </table>
+              <div class="price-recommendation">🏆 Recomendado: <strong>Mercado local</strong> — Ahorro estimado: <strong class="save">S/5.80/semana</strong></div>
+            </div>
+            <div class="price-card">
+              <div class="price-cat">🥩 Embutidos y Proteínas</div>
+              <table class="price-table">
+                <tr><th>Producto</th><th>Mercado</th><th>Super</th><th>Ahorro</th></tr>
+                <tr><td>🐔 Pechuga pollo 1kg</td><td>S/8.00</td><td>S/11.00</td><td class="save">S/3.00</td></tr>
+                <tr><td>🧀 Queso fresco 250g</td><td>S/5.00</td><td>S/7.50</td><td class="save">S/2.50</td></tr>
+                <tr><td>🥚 Huevos x12</td><td>S/6.00</td><td>S/7.80</td><td class="save">S/1.80</td></tr>
+                <tr><td>🍖 Jamón de pavo 100g</td><td>S/3.50</td><td>S/5.00</td><td class="save">S/1.50</td></tr>
+              </table>
+              <div class="price-recommendation">🏆 Recomendado: <strong>Mercado local</strong> — Ahorro estimado: <strong class="save">S/8.80/semana</strong></div>
+            </div>
+          </div>
+          <div class="total-savings">
+            <div class="savings-card">
+              <div class="savings-icon">💰</div>
+              <div class="savings-text">
+                <h3>Ahorro total estimado</h3>
+                <div class="savings-amount">S/14.60 por semana</div>
+                <p>S/58.40 al mes comprando en el mercado</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: REGISTRO DE GASTOS -->
+      <div id="ptab-gastos" class="ptab">
+        <div class="ptab-content">
+          <h2>📊 Registro de Gastos</h2>
+          <div class="gastos-form card">
+            <h3>➕ Agregar nuevo gasto</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label>📅 Fecha</label>
+                <input type="date" id="gasto-fecha" class="input-field">
+              </div>
+              <div class="form-group">
+                <label>🍽️ Receta preparada</label>
+                <select id="gasto-receta" class="input-field">
+                  <option>Wrap Power</option>
+                  <option>Brochetas Superhéroe</option>
+                  <option>Mini Hamburguesitas</option>
+                  <option>Pizza Escolar Nutritiva</option>
+                  <option>Rollitos Campeones</option>
+                </select>
+              </div>
+            </div>
+            <div id="gasto-ingredientes">
+              <div class="ingredient-row">
+                <input type="text" placeholder="Ingrediente" class="input-field small">
+                <input type="number" placeholder="S/" class="input-field tiny">
+              </div>
+            </div>
+            <button class="btn-ghost" onclick="addIngredientRow()">+ Agregar ingrediente</button>
+            <button class="btn-primary" onclick="saveGasto()">💾 Guardar gasto</button>
+          </div>
+          <div class="gastos-charts">
+            <h3>📈 Resumen de Gastos</h3>
+            <div class="chart-container" id="gastos-chart"></div>
+          </div>
+          <div id="gastos-list" class="gastos-list"></div>
+        </div>
+      </div>
+
+      <!-- TAB: SALÓN DE LA FAMA -->
+      <div id="ptab-salon" class="ptab">
+        <div class="ptab-content">
+          <h2>🏆 Salón de la Fama</h2>
+          <p class="tab-subtitle">Las mejores loncheras de nuestra comunidad</p>
+          <div id="salon-posts" class="salon-grid"></div>
+        </div>
+      </div>
+
+      <!-- TAB: FORO -->
+      <div id="ptab-foro" class="ptab">
+        <div class="ptab-content">
+          <h2>💬 Foro de Padres</h2>
+          <div class="foro-new card">
+            <h3>✍️ Compartir consejo</h3>
+            <textarea id="foro-text" placeholder="Comparte tu consejo, receta favorita o tip..." class="textarea-field"></textarea>
+            <button class="btn-primary" onclick="postForo()">Publicar 🚀</button>
+          </div>
+          <div id="foro-posts" class="foro-list"></div>
+        </div>
+      </div>
+
+    </div><!-- .parents-app -->
+  </div><!-- #section-parents -->
+
+  <!-- ==================== SECCIÓN NIÑOS ==================== -->
+  <div id="section-kids" class="screen">
+    <div class="kids-app">
+
+      <!-- TOPBAR NIÑOS (solo visible en móvil, mostrada arriba) -->
+      <div class="kids-topbar">
+        <div style="font-family:'Fredoka One',cursive;font-size:18px;color:var(--yellow)">🥗 NutriBox</div>
+        <div style="display:flex;gap:10px;font-size:12px;font-weight:700">
+          <span>🪙 <span id="kids-coins-top">150</span></span>
+          <span>⚡ <span id="kids-xp-top">320</span>XP</span>
+        </div>
+      </div>
+
+      <!-- NAVBAR NIÑOS (videojuego style) -->
+      <nav class="kids-nav">
+        <div class="kids-nav-logo">🥗 NutriBox</div>
+        <div class="kids-nav-coins">
+          <span>🪙 <span id="kids-coins">150</span></span>
+          <span>⚡ <span id="kids-xp">320</span> XP</span>
+        </div>
+        <div class="kids-nav-links">
+          <button class="kids-nav-btn active" onclick="showKidsTab('khome')" id="knav-khome">🏠</button>
+          <button class="kids-nav-btn" onclick="showKidsTab('kformulario')" id="knav-kformulario">📝</button>
+          <button class="kids-nav-btn" onclick="showKidsTab('khistorial')" id="knav-khistorial">📸</button>
+          <button class="kids-nav-btn" onclick="showKidsTab('kinsignias')" id="knav-kinsignias">🏅</button>
+          <button class="kids-nav-btn" onclick="showKidsTab('kjuegos')" id="knav-kjuegos">🎮</button>
+          <button class="kids-nav-btn" onclick="showKidsTab('karbol')" id="knav-karbol">🌳</button>
+        </div>
+        <button class="btn-exit-kids" onclick="showScreen('screen-role')">🚪</button>
+      </nav>
+
+      <!-- TAB: INICIO NIÑOS -->
+      <div id="ktab-khome" class="ktab active">
+        <div class="kids-home">
+          <div class="kids-welcome">
+            <h1>¡Hola, <span id="kids-name">Campeón</span>! 🌟</h1>
+            <p>¿Listo para ganar más insignias hoy?</p>
+          </div>
+          <div class="avatar-section">
+            <div class="avatar-container" id="main-avatar">
+              <div class="avatar-body">🧒</div>
+              <div class="avatar-items" id="avatar-items"></div>
+            </div>
+            <button class="btn-kids-secondary" onclick="customizeAvatar()">✏️ Personalizar avatar</button>
+          </div>
+          <div class="kids-stats">
+            <div class="kids-stat-card">
+              <div>🏅</div>
+              <div class="kids-stat-num" id="kids-badges-count">12</div>
+              <div>Insignias</div>
+            </div>
+            <div class="kids-stat-card">
+              <div>🥗</div>
+              <div class="kids-stat-num" id="kids-lunches-count">7</div>
+              <div>Loncheras</div>
+            </div>
+            <div class="kids-stat-card">
+              <div>🪙</div>
+              <div class="kids-stat-num">150</div>
+              <div>Nutricoins</div>
+            </div>
+          </div>
+          <div class="daily-challenge">
+            <h3>🎯 Reto de Hoy</h3>
+            <div class="challenge-card">
+              <div class="challenge-icon">📸</div>
+              <div class="challenge-text">
+                <h4>¡Sube tu lonchera de hoy!</h4>
+                <p>Gana +5 monedas y +1 insignia</p>
+              </div>
+              <button class="btn-challenge" onclick="showKidsTab('kformulario')">¡Ir! →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: FORMULARIO NIÑOS -->
+      <div id="ktab-kformulario" class="ktab">
+        <div class="kids-tab-content">
+          <h2 class="kids-title">📝 ¡Cuéntanos sobre ti!</h2>
+          <div class="kids-form-grid">
+            <div class="kids-form-card">
+              <h3>🍎 ¿Qué frutas te gustan?</h3>
+              <div class="emoji-picker">
+                <label class="emoji-check"><input type="checkbox" value="manzana"><span>🍎 Manzana</span></label>
+                <label class="emoji-check"><input type="checkbox" value="platano"><span>🍌 Plátano</span></label>
+                <label class="emoji-check"><input type="checkbox" value="fresa"><span>🍓 Fresa</span></label>
+                <label class="emoji-check"><input type="checkbox" value="naranja"><span>🍊 Naranja</span></label>
+                <label class="emoji-check"><input type="checkbox" value="uva"><span>🍇 Uvas</span></label>
+                <label class="emoji-check"><input type="checkbox" value="sandia"><span>🍉 Sandía</span></label>
+              </div>
+            </div>
+            <div class="kids-form-card">
+              <h3>🥦 ¿Qué verduras prefieres?</h3>
+              <div class="emoji-picker">
+                <label class="emoji-check"><input type="checkbox" value="zanahoria"><span>🥕 Zanahoria</span></label>
+                <label class="emoji-check"><input type="checkbox" value="tomate"><span>🍅 Tomate</span></label>
+                <label class="emoji-check"><input type="checkbox" value="pepino"><span>🥒 Pepino</span></label>
+                <label class="emoji-check"><input type="checkbox" value="espinaca"><span>🥬 Espinaca</span></label>
+                <label class="emoji-check"><input type="checkbox" value="brocoli"><span>🥦 Brócoli</span></label>
+              </div>
+            </div>
+            <div class="kids-form-card">
+              <h3>😕 ¿Qué NO te gusta comer?</h3>
+              <input type="text" id="kids-dislike" placeholder="Escribe aquí..." class="input-field kids-input">
+            </div>
+            <div class="kids-form-card">
+              <h3>😋 ¿Cuál es tu comida favorita?</h3>
+              <input type="text" id="kids-fav" placeholder="Ej: arroz con pollo..." class="input-field kids-input">
+            </div>
+            <div class="kids-form-card camera-card">
+              <h3>📸 Cámara NutriBox</h3>
+              <p>¡Sube la foto de tu lonchera!</p>
+              <div class="camera-upload" id="camera-area" onclick="uploadLunchPhoto()">
+                <div class="camera-icon">📷</div>
+                <p>Toca para subir foto</p>
+                <input type="file" id="lunch-photo" accept="image/*" style="display:none" onchange="handlePhotoUpload(this)">
+              </div>
+            </div>
+          </div>
+          <button class="btn-kids-primary big" onclick="saveKidsForm()">💾 ¡Guardar mis preferencias!</button>
+        </div>
+      </div>
+
+      <!-- TAB: HISTORIAL LONCHERAS -->
+      <div id="ktab-khistorial" class="ktab">
+        <div class="kids-tab-content">
+          <h2 class="kids-title">📸 Mis Loncheras</h2>
+          <div id="kids-lunches-grid" class="kids-lunches-grid"></div>
+        </div>
+      </div>
+
+      <!-- TAB: INSIGNIAS -->
+      <div id="ktab-kinsignias" class="ktab">
+        <div class="kids-tab-content">
+          <h2 class="kids-title">🏅 Mis Insignias</h2>
+          <div class="badges-progress">
+            <div class="bp-header">
+              <span>Insignias: <strong id="badges-total">12</strong>/50</span>
+              <span class="level-label" id="current-level-label">⚡ Explorador Energético</span>
+            </div>
+            <div class="big-progress-bar">
+              <div class="big-progress-fill" id="badges-progress-bar" style="width:24%"></div>
+            </div>
+          </div>
+          <div id="badges-grid" class="badges-grid"></div>
+        </div>
+      </div>
+
+      <!-- TAB: JUEGOS -->
+      <div id="ktab-kjuegos" class="ktab">
+        <div class="kids-tab-content">
+          <h2 class="kids-title">🎮 Videojuegos NutriBox</h2>
+          <div class="games-grid" id="games-grid">
+
+            <div class="game-card unlocked" onclick="playGame('frutas')">
+              <div class="game-icon">🍎</div>
+              <h3>Atrapa las Frutas</h3>
+              <p>¡Atrapa todas las frutas! Evita la comida chatarra</p>
+              <div class="game-reward">+3 🏅 insignias</div>
+              <button class="btn-play">▶ Jugar</button>
+            </div>
+
+            <div class="game-card unlocked" onclick="playGame('carrera')">
+              <div class="game-icon">🏃</div>
+              <h3>Carrera de Alimentos</h3>
+              <p>¡Corre y come solo alimentos saludables!</p>
+              <div class="game-reward">+3 🏅 insignias</div>
+              <button class="btn-play">▶ Jugar</button>
+            </div>
+
+            <div class="game-card" id="game-memoria" onclick="playGame('memoria')">
+              <div class="game-icon">🧠</div>
+              <h3>Memoria Nutricional</h3>
+              <p>Encuentra los pares de alimentos saludables</p>
+              <div class="game-reward">+2 🏅 insignias</div>
+              <div class="game-lock" id="lock-memoria">🔒 Desbloquea con 15 insignias</div>
+              <button class="btn-play">▶ Jugar</button>
+            </div>
+
+            <div class="game-card" id="game-rompecabezas" onclick="playGame('rompecabezas')">
+              <div class="game-icon">🧩</div>
+              <h3>Rompecabezas de Frutas</h3>
+              <p>¡Arma el rompecabezas!</p>
+              <div class="game-reward">+2 🏅 insignias</div>
+              <div class="game-lock" id="lock-rompecabezas">🔒 Desbloquea con 20 insignias</div>
+              <button class="btn-play">▶ Jugar</button>
+            </div>
+
+            <div class="game-card" id="game-cocina" onclick="playGame('cocina')">
+              <div class="game-icon">⏰</div>
+              <h3>Cocina Contra Reloj</h3>
+              <p>¡Prepara la lonchera antes que acabe el tiempo!</p>
+              <div class="game-reward">+4 🏅 insignias</div>
+              <div class="game-lock" id="lock-cocina">🔒 Desbloquea con 25 insignias</div>
+              <button class="btn-play">▶ Jugar</button>
+            </div>
+
+            <div class="game-card" id="game-alimenta" onclick="playGame('alimenta')">
+              <div class="game-icon">🦸</div>
+              <h3>Alimenta al Héroe</h3>
+              <p>¡Dale la comida correcta al superhéroe!</p>
+              <div class="game-reward">+5 🏅 insignias</div>
+              <div class="game-lock" id="lock-alimenta">🔒 Desbloquea con 30 insignias</div>
+              <button class="btn-play">▶ Jugar</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: ÁRBOL DEL PROGRESO -->
+      <div id="ktab-karbol" class="ktab">
+        <div class="kids-tab-content">
+          <h2 class="kids-title">🌳 Mi Árbol del Progreso</h2>
+          <div class="tree-scene" id="tree-scene">
+            <div class="sky"></div>
+            <div class="ground"></div>
+            <div class="tree-pot">
+              <div class="pot">🪴</div>
+              <div id="tree-visual" class="tree-visual"></div>
+              <div id="tree-stage-label" class="tree-stage-label">🌱 Brote</div>
+            </div>
+          </div>
+          <div class="tree-milestones">
+            <h3>Hitos del Árbol</h3>
+            <div class="milestones-list">
+              <div class="milestone done"><span>0</span> 🌰 Semilla</div>
+              <div class="milestone done"><span>5</span> 🌱 Brote</div>
+              <div class="milestone done"><span>10</span> 🪴 Planta pequeña</div>
+              <div class="milestone"><span>20</span> 🌿 Árbol joven</div>
+              <div class="milestone"><span>30</span> 🌳 Árbol grande</div>
+              <div class="milestone"><span>40</span> 🌸 Árbol con flores</div>
+              <div class="milestone"><span>50</span> 🍎 Gran árbol lleno de frutos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- .kids-app -->
+  </div><!-- #section-kids -->
+
+  <!-- MODAL DE RECETA -->
+  <div id="recipe-modal" class="modal-overlay" onclick="closeRecipeModal(event)">
+    <div class="modal-card" id="recipe-modal-content"></div>
+  </div>
+
+  <!-- MODAL DE JUEGO -->
+  <div id="game-modal" class="modal-overlay" onclick="closeGameModal(event)">
+    <div class="modal-card game-modal-card" id="game-modal-content"></div>
+  </div>
+
+  <!-- MODAL DE RECOMPENSA -->
+  <div id="reward-modal" class="modal-overlay">
+    <div class="reward-card">
+      <div class="confetti-area" id="confetti-area"></div>
+      <div class="reward-content">
+        <div class="reward-icon" id="reward-icon">🏅</div>
+        <h2 id="reward-title">¡Felicidades!</h2>
+        <p id="reward-text">Has ganado una insignia</p>
+        <button class="btn-kids-primary" onclick="closeReward()">¡Genial! 🎉</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL AVATAR -->
+  <div id="avatar-modal" class="modal-overlay" onclick="closeAvatarModal(event)">
+    <div class="modal-card">
+      <h2>✏️ Personaliza tu Avatar</h2>
+      <div class="avatar-options">
+        <h3>Skin</h3>
+        <div class="avatar-choices">
+          <span onclick="setAvatarPart('skin','🧒')" class="av-opt">🧒</span>
+          <span onclick="setAvatarPart('skin','👦')" class="av-opt">👦</span>
+          <span onclick="setAvatarPart('skin','👧')" class="av-opt">👧</span>
+          <span onclick="setAvatarPart('skin','🧑')" class="av-opt">🧑</span>
+        </div>
+        <h3>Accesorios (desbloqueable)</h3>
+        <div class="avatar-choices">
+          <span onclick="setAvatarPart('acc','🎩')" class="av-opt">🎩</span>
+          <span onclick="setAvatarPart('acc','👑')" class="av-opt">👑</span>
+          <span onclick="setAvatarPart('acc','🦸')" class="av-opt">🦸</span>
+          <span onclick="setAvatarPart('acc','🧢')" class="av-opt">🧢</span>
+        </div>
+      </div>
+      <button class="btn-kids-primary" onclick="closeAvatarModal()">Guardar ✅</button>
+    </div>
+  </div>
+
+</div><!-- #app -->
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/games.js"></script>
+</body>
+</html>
