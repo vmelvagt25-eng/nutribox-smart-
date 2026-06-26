@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriBox - Código QR</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #4CAF50 0%, #2196F3 50%, #FF7043 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 32px;
+      padding: 40px 36px;
+      text-align: center;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+
+    .logo {
+      font-size: 52px;
+      margin-bottom: 4px;
+    }
+
+    .app-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 36px;
+      color: #4CAF50;
+      margin-bottom: 4px;
+    }
+
+    .slogan {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    /* QR container */
+    #qr-box {
+      display: inline-block;
+      padding: 16px;
+      background: white;
+      border: 4px solid #4CAF50;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(76,175,80,0.2);
+      margin-bottom: 20px;
+    }
+
+    #qr-box img, #qr-box canvas {
+      border-radius: 8px;
+      display: block;
+    }
+
+    .url-box {
+      background: #f8fff8;
+      border: 2px dashed #4CAF50;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-size: 12px;
+      color: #2e7d32;
+      word-break: break-all;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .instructions {
+      background: #fff9f0;
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .instructions h3 {
+      font-size: 14px;
+      color: #FF7043;
+      margin-bottom: 10px;
+    }
+
+    .instructions ol {
+      padding-left: 20px;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.9;
+    }
+
+    .online-section {
+      background: #e3f2fd;
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .online-section h3 {
+      font-size: 14px;
+      color: #1565C0;
+      margin-bottom: 8px;
+    }
+
+    .online-section p {
+      font-size: 12px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .online-section code {
+      background: rgba(0,0,0,0.08);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    /* Botones */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-download {
+      background: linear-gradient(135deg, #4CAF50, #388E3C);
+      color: white;
+      border: none;
+      padding: 13px 28px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      box-shadow: 0 4px 16px rgba(76,175,80,0.4);
+      transition: transform 0.15s;
+    }
+
+    .btn-download:hover { transform: scale(1.04); }
+
+    .btn-open {
+      background: linear-gradient(135deg, #FF7043, #E64A19);
+      color: white;
+      border: none;
+      padding: 13px 28px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 16px rgba(255,112,67,0.4);
+      transition: transform 0.15s;
+    }
+
+    .btn-open:hover { transform: scale(1.04); }
+
+    .custom-url-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px dashed #e0e0e0;
+    }
+
+    .custom-url-section h3 {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .url-input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 13px;
+      font-family: 'Nunito', sans-serif;
+      outline: none;
+    }
+
+    .url-input:focus { border-color: #4CAF50; }
+
+    .btn-gen {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      white-space: nowrap;
+    }
+
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <div class="logo floating">🥗</div>
+  <div class="app-name">NutriBox</div>
+  <p class="slogan">"Cada lonchera saludable es un paso hacia un futuro más fuerte."</p>
+
+  <!-- QR generado -->
+  <div id="qr-box">
+    <div id="qrcode"></div>
+  </div>
+
+  <div class="url-box" id="url-display">
+    🌐 http://192.167.1.39:8080/
+  </div>
+
+  <!-- Instrucciones de uso local -->
+  <div class="instructions">
+    <h3>📱 ¿Cómo usar este QR en tu PC?</h3>
+    <ol>
+      <li>Abre la cámara de tu celular</li>
+      <li>Apunta al QR — verás una URL</li>
+      <li><strong>Esa URL solo funciona en esta PC</strong></li>
+      <li>Para usarlo en otros dispositivos → lee abajo ↓</li>
+    </ol>
+  </div>
+
+  <!-- Cómo publicar en línea -->
+  <div class="online-section">
+    <h3>🌐 ¿Quieres un QR que funcione en cualquier celular?</h3>
+    <p>
+      Sube la carpeta <code>NutriBox</code> a <strong>GitHub Pages</strong> o <strong>Netlify</strong> gratis:<br><br>
+      1. Ve a <strong>netlify.com</strong> → "Deploy manually"<br>
+      2. Arrastra la carpeta <code>NutriBox</code> a la página<br>
+      3. Obtendrás una URL como <code>nutribox.netlify.app</code><br>
+      4. Pega esa URL abajo y genera el nuevo QR 👇
+    </p>
+  </div>
+
+  <!-- Generar QR personalizado -->
+  <div class="custom-url-section">
+    <h3>🔗 Generar QR con URL personalizada (ej: Netlify, GitHub Pages)</h3>
+    <div class="input-row">
+      <input type="text" class="url-input" id="custom-url"
+        placeholder="https://mi-nutribox.netlify.app">
+      <button class="btn-gen" onclick="generateQR()">Generar QR</button>
+    </div>
+  </div>
+
+  <br>
+
+  <!-- Botones -->
+  <div class="btn-row">
+    <button class="btn-download" onclick="downloadQR()">⬇ Descargar QR</button>
+    <a class="btn-open" href="index.html">🚀 Abrir App</a>
+  </div>
+
+</div>
+
+<script>
+  const LOCAL_URL = 'http://192.167.1.39:8080/';
+  let currentQR = null;
+
+  function generateQR(url) {
+    url = url || document.getElementById('custom-url').value.trim() || LOCAL_URL;
+
+    // Limpiar QR anterior
+    const container = document.getElementById('qrcode');
+    container.innerHTML = '';
+
+    currentQR = new QRCode(container, {
+      text: url,
+      width: 220,
+      height: 220,
+      colorDark: '#1b5e20',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    document.getElementById('url-display').innerHTML = `📄 ${url}`;
+  }
+
+  function downloadQR() {
+    setTimeout(() => {
+      const canvas = document.querySelector('#qrcode canvas');
+      if (!canvas) {
+        // Intenta con img
+        const img = document.querySelector('#qrcode img');
+        if (img) {
+          const a = document.createElement('a');
+          a.href = img.src;
+          a.download = 'nutribox-qr.png';
+          a.click();
+        }
+        return;
+      }
+
+      // Crear canvas decorado con logo
+      const final = document.createElement('canvas');
+      final.width = 320;
+      final.height = 380;
+      const ctx = final.getContext('2d');
+
+      // Fondo
+      const grad = ctx.createLinearGradient(0, 0, 320, 380);
+      grad.addColorStop(0, '#e8f5e9');
+      grad.addColorStop(1, '#fff9f0');
+      ctx.fillStyle = grad;
+      ctx.roundRect(0, 0, 320, 380, 20);
+      ctx.fill();
+
+      // Marco verde
+      ctx.strokeStyle = '#4CAF50';
+      ctx.lineWidth = 6;
+      ctx.roundRect(3, 3, 314, 374, 18);
+      ctx.stroke();
+
+      // Emoji y texto
+      ctx.font = '36px serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('🥗', 160, 52);
+
+      ctx.fillStyle = '#2e7d32';
+      ctx.font = 'bold 26px Fredoka One, sans-serif';
+      ctx.fillText('NutriBox', 160, 82);
+
+      // QR
+      ctx.drawImage(canvas, 50, 98, 220, 220);
+
+      // Footer
+      ctx.fillStyle = '#888';
+      ctx.font = '11px Nunito, sans-serif';
+      ctx.fillText('Escanea para abrir la app', 160, 348);
+      ctx.fillStyle = '#4CAF50';
+      ctx.font = 'bold 11px Nunito, sans-serif';
+      ctx.fillText('¡Loncheras saludables todos los días! 💚', 160, 366);
+
+      const a = document.createElement('a');
+      a.href = final.toDataURL('image/png');
+      a.download = 'nutribox-qr.png';
+      a.click();
+    }, 300);
+  }
+
+  // Generar QR al cargar
+  window.addEventListener('load', () => generateQR(LOCAL_URL));
+</script>
+
+</body>
+</html>
