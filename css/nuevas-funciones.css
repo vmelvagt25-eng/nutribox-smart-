@@ -1,0 +1,269 @@
+/* ============================================================
+   NUTRIBOX — NUEVAS FUNCIONES: Encuestas, Registro,
+   Observación Docente, Comparación de Calificaciones
+   ============================================================ */
+
+/* ============================================================
+   ENCUESTAS MENSUALES
+   ============================================================ */
+.encuesta-card { border-left: 6px solid var(--green); }
+.encuesta-header { margin-bottom: 20px; }
+.encuesta-header h3 { font-size: 20px; color: var(--dark); margin-bottom: 4px; }
+.encuesta-header p { font-size: 13px; color: #888; }
+.encuesta-badge {
+  display: inline-block; background: #e8f5e9; color: var(--green);
+  padding: 4px 14px; border-radius: 50px; font-size: 12px;
+  font-weight: 800; margin-bottom: 8px;
+}
+.encuesta-pregunta {
+  background: #fafafa; border-radius: 14px; padding: 16px;
+  margin-bottom: 14px; border: 1px solid #f0f0f0;
+}
+.encuesta-pregunta p { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+.enc-options { display: flex; flex-direction: column; gap: 8px; }
+.enc-opt {
+  display: flex; align-items: center; gap: 10px; cursor: pointer;
+  font-size: 14px; padding: 8px 12px; border-radius: 10px;
+  transition: background 0.15s;
+}
+.enc-opt:hover { background: #e8f5e9; }
+.enc-opt input[type="radio"] { accent-color: var(--green); width: 16px; height: 16px; }
+.enc-star-rating { display: flex; gap: 8px; font-size: 28px; cursor: pointer; }
+.enc-star { transition: transform 0.15s; }
+.enc-star:hover { transform: scale(1.3); }
+.enc-star.active { filter: drop-shadow(0 0 6px gold); }
+
+.encuestas-historial { margin-top: 24px; }
+.encuestas-historial h3 { margin-bottom: 16px; }
+.encuestas-list { display: flex; flex-direction: column; gap: 12px; }
+.enc-hist-item {
+  background: white; border-radius: 16px; padding: 16px 20px;
+  box-shadow: var(--shadow); display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.enc-hist-left h4 { font-size: 15px; margin-bottom: 4px; }
+.enc-hist-left p { font-size: 12px; color: #888; }
+.enc-hist-score {
+  font-size: 24px; font-weight: 900; color: var(--green);
+  background: #e8f5e9; padding: 8px 16px; border-radius: 12px;
+}
+
+.tendencias-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;
+}
+.tendencia-item {
+  background: #f8fff8; border-radius: 14px; padding: 14px; text-align: center;
+  border: 2px solid #e8f5e9;
+}
+.tendencia-item .t-val { font-size: 24px; font-weight: 900; color: var(--green); }
+.tendencia-item .t-label { font-size: 12px; color: #888; margin-top: 4px; }
+.tendencia-item .t-trend { font-size: 18px; margin-bottom: 4px; }
+
+/* ============================================================
+   REGISTRO DE LONCHERAS TERMINADAS
+   ============================================================ */
+.termino-opts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.termino-btn {
+  flex: 1; min-width: 100px; padding: 10px 14px; border-radius: 14px;
+  border: 2px solid #e0e0e0; background: white; cursor: pointer;
+  font-size: 13px; font-weight: 700; font-family: 'Nunito', sans-serif;
+  transition: all 0.15s;
+}
+.termino-btn:hover { border-color: var(--green); }
+.termino-btn.active { background: var(--green); color: white; border-color: var(--green); }
+.termino-btn[data-val="mitad"].active { background: var(--yellow); border-color: var(--yellow); color: var(--dark); }
+.termino-btn[data-val="no"].active { background: var(--orange); border-color: var(--orange); color: white; }
+
+.star-rating-row { display: flex; gap: 6px; font-size: 24px; cursor: pointer; margin-top: 4px; }
+.reg-star { transition: transform 0.15s; filter: grayscale(1) opacity(0.4); }
+.reg-star.active { filter: none; transform: scale(1.1); }
+
+.registro-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px; margin-top: 20px;
+}
+.reg-stat-card {
+  border-radius: 20px; padding: 20px; text-align: center; box-shadow: var(--shadow);
+}
+.reg-stat-card.verde { background: linear-gradient(135deg, #e8f5e9, #f1f8e9); border-top: 4px solid var(--green); }
+.reg-stat-card.amarillo { background: linear-gradient(135deg, #fffde7, #fff9c4); border-top: 4px solid var(--yellow); }
+.reg-stat-card.rojo { background: linear-gradient(135deg, #ffebee, #fce4ec); border-top: 4px solid var(--orange); }
+.reg-stat-card.azul { background: linear-gradient(135deg, #e3f2fd, #e1f5fe); border-top: 4px solid var(--blue); }
+.rs-icon { font-size: 24px; margin-bottom: 6px; }
+.rs-num { font-size: 32px; font-weight: 900; color: var(--dark); }
+.rs-label { font-size: 12px; color: #888; font-weight: 600; margin-top: 4px; }
+
+.registro-calendario {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
+  margin-top: 8px;
+}
+.cal-day {
+  aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center;
+  justify-content: center; font-size: 12px; font-weight: 700; cursor: default;
+}
+.cal-day.vacio { background: #f5f5f5; color: #ccc; }
+.cal-day.completa { background: var(--green); color: white; }
+.cal-day.mitad { background: var(--yellow); color: var(--dark); }
+.cal-day.no-comio { background: #ffcdd2; color: #c62828; }
+.cal-day.sin-registro { background: #eeeeee; color: #9e9e9e; }
+.cal-day-header {
+  text-align: center; font-size: 11px; font-weight: 800; color: #888; padding: 4px 0;
+}
+
+.registro-list { display: flex; flex-direction: column; gap: 10px; }
+.reg-item {
+  background: white; border-radius: 16px; padding: 14px 18px;
+  box-shadow: var(--shadow); display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.reg-item-emoji { font-size: 28px; }
+.reg-item-info { flex: 1; }
+.reg-item-info h4 { font-size: 14px; font-weight: 800; }
+.reg-item-info p { font-size: 12px; color: #888; }
+.reg-item-status {
+  padding: 5px 14px; border-radius: 50px; font-size: 12px; font-weight: 800;
+}
+.status-completa { background: #e8f5e9; color: var(--green); }
+.status-mitad { background: #fffde7; color: #f57f17; }
+.status-no { background: #ffebee; color: var(--orange); }
+
+/* ============================================================
+   OBSERVACIÓN DOCENTE
+   ============================================================ */
+.docente-form { border-left: 6px solid var(--blue); }
+.docente-header { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; }
+.docente-avatar {
+  width: 52px; height: 52px; background: linear-gradient(135deg, var(--blue), var(--blue2));
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;
+  flex-shrink: 0;
+}
+.docente-header h3 { font-size: 18px; margin-bottom: 2px; }
+
+.doc-categorias { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.doc-cat {
+  background: #f0f0f0; border: none; padding: 8px 16px; border-radius: 50px;
+  cursor: pointer; font-size: 13px; font-weight: 700; color: #666;
+  font-family: 'Nunito', sans-serif; transition: all 0.15s;
+}
+.doc-cat:hover, .doc-cat.active { background: var(--blue); color: white; }
+
+.doc-valoracion { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.val-btn {
+  flex: 1; min-width: 120px; padding: 10px; border-radius: 12px;
+  border: 2px solid #e0e0e0; background: white; cursor: pointer;
+  font-size: 13px; font-weight: 700; font-family: 'Nunito', sans-serif;
+  transition: all 0.15s;
+}
+.val-btn:hover { border-color: var(--blue); }
+.val-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
+
+.docente-list { display: flex; flex-direction: column; gap: 14px; }
+.doc-item {
+  background: white; border-radius: 18px; padding: 18px 20px;
+  box-shadow: var(--shadow); border-left: 5px solid var(--blue);
+}
+.doc-item-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px; flex-wrap: wrap; gap: 8px;
+}
+.doc-item-teacher { font-weight: 800; font-size: 14px; }
+.doc-item-date { font-size: 12px; color: #888; }
+.doc-item-cat {
+  background: #e3f2fd; color: var(--blue); padding: 3px 12px;
+  border-radius: 50px; font-size: 11px; font-weight: 800;
+}
+.doc-item-text { font-size: 14px; color: #444; line-height: 1.6; margin: 8px 0; }
+.doc-item-val {
+  display: inline-block; padding: 4px 14px; border-radius: 50px;
+  font-size: 12px; font-weight: 800;
+}
+.val-excelente { background: #e8f5e9; color: #2e7d32; }
+.val-bueno { background: #e3f2fd; color: #1565c0; }
+.val-regular { background: #fffde7; color: #f57f17; }
+.val-necesita-mejora { background: #ffebee; color: #c62828; }
+
+.docente-resumen {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 8px;
+}
+.doc-res-item {
+  background: #f5f5f5; border-radius: 12px; padding: 12px; text-align: center;
+}
+.doc-res-emoji { font-size: 24px; margin-bottom: 4px; }
+.doc-res-count { font-size: 22px; font-weight: 900; color: var(--blue); }
+.doc-res-label { font-size: 11px; color: #888; }
+
+/* ============================================================
+   COMPARACIÓN DE CALIFICACIONES
+   ============================================================ */
+.cal-chart {
+  display: flex; align-items: flex-end; gap: 16px;
+  height: 180px; padding: 16px 0 0; overflow-x: auto;
+}
+.cal-bar-group { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 80px; }
+.cal-bars { display: flex; gap: 4px; align-items: flex-end; height: 140px; }
+.cal-bar-nota {
+  width: 24px; background: linear-gradient(180deg, var(--blue), var(--blue2));
+  border-radius: 6px 6px 0 0; transition: height 0.8s ease;
+  cursor: pointer; position: relative;
+}
+.cal-bar-lonch {
+  width: 24px; background: linear-gradient(180deg, var(--green), var(--green2));
+  border-radius: 6px 6px 0 0; transition: height 0.8s ease;
+  cursor: pointer;
+}
+.cal-bar-nota:hover::after, .cal-bar-lonch:hover::after {
+  content: attr(data-val);
+  position: absolute; top: -24px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.8); color: white; padding: 2px 6px;
+  border-radius: 6px; font-size: 11px; white-space: nowrap;
+}
+.cal-bar-label { font-size: 11px; color: #888; font-weight: 700; text-align: center; }
+.cal-legend {
+  display: flex; gap: 20px; justify-content: center; margin-bottom: 12px;
+}
+.cal-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+.legend-nota { background: var(--blue); }
+.legend-lonch { background: var(--green); }
+
+.cal-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 480px; }
+.cal-table th {
+  background: linear-gradient(135deg, var(--green), #388E3C);
+  color: white; padding: 10px 12px; text-align: center; font-weight: 800;
+}
+.cal-table th:first-child { text-align: left; border-radius: 8px 0 0 0; }
+.cal-table th:last-child { border-radius: 0 8px 0 0; }
+.cal-table td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; text-align: center; }
+.cal-table td:first-child { text-align: left; font-weight: 700; }
+.cal-table tr:hover td { background: #f8fff8; }
+.nota-alta { color: var(--green); font-weight: 900; }
+.nota-media { color: #f57f17; font-weight: 900; }
+.nota-baja { color: var(--orange); font-weight: 900; }
+.tendencia-up { color: var(--green); font-size: 16px; }
+.tendencia-down { color: var(--orange); font-size: 16px; }
+.tendencia-igual { color: #888; font-size: 16px; }
+
+.ia-analysis { border-left: 6px solid var(--purple, #9C27B0); }
+.ia-header { display: flex; gap: 14px; align-items: center; margin-bottom: 12px; }
+.ia-header h3 { font-size: 17px; margin-bottom: 2px; }
+.ia-text {
+  font-size: 14px; color: #444; line-height: 1.7;
+  background: #f8f0ff; border-radius: 12px; padding: 14px 16px;
+  border: 1px solid #e1bee7;
+}
+
+/* ============================================================
+   RESPONSIVE NUEVAS FUNCIONES
+   ============================================================ */
+@media (max-width: 639px) {
+  .termino-opts { flex-direction: column; }
+  .termino-btn { min-width: unset; }
+  .doc-valoracion { flex-direction: column; }
+  .val-btn { min-width: unset; }
+  .registro-stats { grid-template-columns: repeat(2, 1fr); }
+  .registro-calendario { grid-template-columns: repeat(7, 1fr); gap: 3px; }
+  .cal-day { font-size: 10px; border-radius: 6px; }
+  .enc-star-rating { font-size: 24px; }
+  .encuesta-pregunta { padding: 12px; }
+  .doc-categorias { gap: 6px; }
+  .doc-cat { padding: 6px 12px; font-size: 12px; }
+}
